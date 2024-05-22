@@ -1,16 +1,22 @@
 import numpy as np
-from ml.model import MLModel
+from glob import glob
+from PIL import Image
+from model import LungsModel, MlModel
+from utils import preprocess_data
 
-def load_training_data():
-    X = 0
-    y = 0
+def load_data(file_path = "ml_data/lungs"):
+    data = glob(f'{file_path}/*/*.jpg')
+    X, y = preprocess_data(data)
     return X, y
 
-def train():
-    X, y = load_training_data()
-    model = MLModel()
+def train(model_type: MlModel = LungsModel(), model_name='lungs',path='ml/models',version='0.1'):
+    X, y = load_data()
+    model = model_type
     model.train(X, y)
-    model.save_model('ml/model.pkl')
+    model.save_model(f'{path}/{model_name}.{version}.h5 ')
 
-if __name__ == '__main__':
+def main():
     train()
+    
+if __name__ == '__main__':
+    main()
