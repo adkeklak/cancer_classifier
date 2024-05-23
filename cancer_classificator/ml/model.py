@@ -1,6 +1,8 @@
 import joblib
 import tensorflow as tf
-from utils import decode_image
+from cancer_classificator import ml
+from cancer_classificator.ml import model,utils
+from cancer_classificator.ml.utils import decode_image
 from tensorflow import keras
 from sklearn.model_selection import train_test_split
 from keras import layers
@@ -66,6 +68,6 @@ class LungsModel(MlModel):
             .prefetch(AUTO)
         )
 
-        self.model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy', 'AUC'])
+        self.model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
         self.model.fit(train_ds, validation_data=val_ds, epochs=epochs, verbose=verbose)
