@@ -1,6 +1,6 @@
 model_type: LungsModel
 model_name: lungs
 path: cancer_classificator/ml/models
-version: '0.1.2'
+version: '0.1.3'
 epochs: 1
 verbose: 1

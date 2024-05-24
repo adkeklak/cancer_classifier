@@ -1,6 +1,14 @@
 import numpy as np
 import pandas as pd
 import tensorflow as tf
+from PIL import Image
+from glob import glob
+from keras.preprocessing import image
+
+def load_data(file_path = "ml_data/lungs"):
+    data = glob(f'{file_path}/*/*.jpg')
+    X, y = preprocess_data(data)
+    return X, y
 
 def preprocess_data(data):
     images = [path.replace('\\', '/') for path in data]
@@ -25,3 +33,12 @@ def decode_image(file_path, label=None, augment=False):
         img = tf.image.random_contrast(img, lower=0.9, upper=1.1)
     
     return img, label
+
+def preprocess_image(file_path):
+    img = Image.open(file_path)
+    img = img.resize((512, 512))
+    img_array = image.img_to_array(img)
+    img_array = img_array / 255.0
+    img_array = np.expand_dims(img_array, axis=0)
+
+    return img_array

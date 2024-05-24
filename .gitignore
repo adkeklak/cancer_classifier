@@ -1,4 +1,6 @@
 ml_data/
 __pycache__/
 *.h5
+*.keras
+model_test.py
 1097

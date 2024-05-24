@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 from keras import layers
 from keras.models import Sequential, load_model
 from keras.utils import to_categorical
-from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout,InputLayer
 
 AUTO = tf.data.experimental.AUTOTUNE
 
@@ -34,14 +34,13 @@ class MlModel:
 class LungsModel(MlModel):
     def __init__(self):
         self.model = Sequential([
-            Conv2D(32, (3, 3), activation='relu', input_shape=(512, 512, 3)),
-            MaxPooling2D((2, 2)),
+            InputLayer(input_shape=(512, 512, 3)),
             Conv2D(64, (3, 3), activation='relu'),
             MaxPooling2D((2, 2)),
-            Conv2D(128, (3, 3), activation='relu'),
+            Conv2D(32, (3, 3), activation='relu'),
             MaxPooling2D((2, 2)),
             Flatten(),
-            Dense(128, activation='relu'),
+            Dense(32, activation='relu'),
             Dropout(0.5),
             Dense(3, activation='softmax')
         ])

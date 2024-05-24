@@ -45,8 +45,8 @@ class Command(BaseCommand):
         )
         parser.add_argument(
             '--from_file',
-            action='store_false',
-            help='Load data from file, overwrites other options (default: True)'
+            action='store_true',
+            help='Load data from file, overwrites other options (default: False)'
         )
 
     def handle(self, *args, **options):
