@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Image</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        h2 {
+            font-size: 36px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #drop_zone {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            height: 300px;
+            padding: 50px;
+            text-align: center;
+            font-size: 20px;
+            color: #ccc;
+            background-color: #fff;
+            transition: border-color 0.3s, color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        #drop_zone.dragover {
+            border-color: #000;
+            color: #000;
+        }
+        #uploadForm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #fileInput {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>Upload Image</h2>
+    <form id="uploadForm" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="csrfmiddlewaretoken" value="Vx0bSmeLoXaITWC9fpKuas70CD4eiXRB9I6IbSwOB2pgT2lcik4DweL9Iw2vhIsF">
+        <div id="drop_zone">Drag and drop an image here or click to upload</div>
+        <input type="file" name="image" accept="image/*" required id="fileInput" onchange="submitForm()">
+    </form>
+
+    <script type="text/javascript">
+        function submitForm() {
+            document.getElementById('uploadForm').submit();
+        }
+
+        var dropZone = document.getElementById('drop_zone');
+        var fileInput = document.getElementById('fileInput');
+
+        dropZone.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            dropZone.classList.remove('dragover');
+            var files = e.dataTransfer.files;
+            if (files.length > 0) {
+                fileInput.files = files;
+                submitForm();
+            }
+        });
+
+        dropZone.addEventListener('click', function() {
+            fileInput.click();
+        });
+    </script>
+</body>
+</html>

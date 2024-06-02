@@ -1,5 +1,5 @@
 __pycache__/
 *.h5
 *.keras
-model_test.py
+db.sqlite3
 1097

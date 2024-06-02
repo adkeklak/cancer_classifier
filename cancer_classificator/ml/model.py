@@ -2,7 +2,7 @@ import joblib
 import tensorflow as tf
 from cancer_classificator import ml
 from cancer_classificator.ml import model,utils
-from cancer_classificator.ml.utils import decode_image
+from cancer_classificator.ml.utils import decode_image, decode
 from tensorflow import keras
 from sklearn.model_selection import train_test_split
 from keras import layers
@@ -35,9 +35,11 @@ class LungsModel(MlModel):
     def __init__(self):
         self.model = Sequential([
             InputLayer(input_shape=(512, 512, 3)),
+            Conv2D(32, (3, 3), activation='relu'),
+            MaxPooling2D((2, 2)),
             Conv2D(64, (3, 3), activation='relu'),
             MaxPooling2D((2, 2)),
-            Conv2D(32, (3, 3), activation='relu'),
+            Conv2D(128, (3, 3), activation='relu'),
             MaxPooling2D((2, 2)),
             Flatten(),
             Dense(32, activation='relu'),
