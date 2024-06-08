@@ -20,5 +20,5 @@ from cancer_classificator import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('upload/', views.image_upload_view, name='upload_image'),
+    path('', views.image_upload_view, name='upload_image'),
 ]

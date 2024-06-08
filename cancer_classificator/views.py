@@ -1,9 +1,7 @@
 from django.shortcuts import render
 from .forms import ImageUploadForm
-from cancer_classificator.ml.model import MlModel, LungsModel
+from cancer_classificator.ml.model import LungsModel
 from cancer_classificator.ml.utils import preprocess_image, decode
-from PIL import Image
-import numpy as np
 
 def image_upload_view(request):
     if request.method == 'POST':
