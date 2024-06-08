@@ -21,7 +21,6 @@ def load_yaml(file_path='cancer_classificator/ml/config.yaml'):
 
 def decode(list):
     index = np.argmax(list[0]) 
-
     match index:
         case 0:
             return "normal"
