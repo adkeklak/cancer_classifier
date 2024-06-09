@@ -1,4 +1,4 @@
-name: Python test
+name: Python tests
 
 on: [push]
 
@@ -21,4 +21,4 @@ jobs:
           pip install -r requirements.txt
       - name: Test with Python
         run: |
-          python manage.py test
+          python manage.py test -v 2
